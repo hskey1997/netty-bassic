@@ -1,5 +1,7 @@
 package com.duoqio.mahjong.pojo;
 
+import lombok.Data;
+
 /**
  * @author hsk
  * @title Message
@@ -9,32 +11,9 @@ package com.duoqio.mahjong.pojo;
  * @copyright 重庆多企源科技有限公司
  * @website {[图片]http://www.duoqio.com/index.asp?source=code}
  */
+@Data
 public class Message {
     private String name;
     private String time;
     private String content;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
 }

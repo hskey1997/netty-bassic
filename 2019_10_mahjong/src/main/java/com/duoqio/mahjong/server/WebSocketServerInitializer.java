@@ -22,6 +22,10 @@ import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.codec.http.websocketx.extensions.compression.WebSocketServerCompressionHandler;
+import io.netty.handler.codec.protobuf.ProtobufDecoder;
+import io.netty.handler.codec.protobuf.ProtobufEncoder;
+import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
+import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.timeout.IdleStateHandler;
 
@@ -50,14 +54,12 @@ public class WebSocketServerInitializer extends ChannelInitializer<SocketChannel
         pipeline.addLast(new WebSocketServerCompressionHandler());
         pipeline.addLast(new WebSocketServerProtocolHandler(WEBSOCKET_PATH, null, true));
         /**
-         * 处理空闲状态事件的处理器
-         * IdleStateHandler三个参数分别对应：readerIdleTime，writerIdleTime，allIdleTime
-         * readerIdleTime：表示多长时间没有读，就发送一个心跳包检验是否连接。
-         * writerIdleTime：表示多长时间没有写，就发送一个心跳包检验是否连接。
-         * allIdleTime：表示什么都不做，过多长时间，就发送一个心跳包检验是否连接。
+         * 主要是这四个ProtobufHanderl，用于protobuf编解码。
          */
-//        pipeline.addLast(new IdleStateHandler(5,7,10, TimeUnit.SECONDS));
-//        pipeline.addLast(new WebSocketIndexPageHandler(WEBSOCKET_PATH));
+//        pipeline.addLast(new ProtobufVarint32FrameDecoder());
+//        pipeline.addLast(new ProtobufDecoder(protobuf.MyDataInfo.MyMessage.getDefaultInstance()));
+//        pipeline.addLast(new ProtobufVarint32LengthFieldPrepender());
+//        pipeline.addLast(new ProtobufEncoder());
         pipeline.addLast(new WebSocketFrameHandler());
     }
 }

@@ -1,9 +1,12 @@
 package com.duoqio.mahjong.controller;
 
 import com.duoqio.mahjong.enums.MahJong;
+import com.duoqio.mahjong.pojo.Player;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * @author hsk
@@ -95,6 +98,7 @@ public class MahJongController {
         List<Integer> bottom = new ArrayList<Integer>();
 
         Integer n = 0;
+
         // 给玩家发牌
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 4; j++) {
@@ -148,10 +152,6 @@ public class MahJongController {
         List<String> cardNameList2 = switchToEnumValues(player2,majiang);
         List<String> cardNameList3 = switchToEnumValues(player3,majiang);
         List<String> cardNameList4 = switchToEnumValues(player4,majiang);
-        System.out.println(cardNameList1);
-        System.out.println(cardNameList2);
-        System.out.println(cardNameList3);
-        System.out.println(cardNameList4);
 
         HashMap<String, List<Integer>> map = new HashMap<>();
 
@@ -161,7 +161,6 @@ public class MahJongController {
         map.put("玩家4", cardList4);
         List<Map<String, List<Integer>>> list = new ArrayList<>();
         list.add(map);
-
 
         return list;
     }
